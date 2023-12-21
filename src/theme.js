@@ -19,6 +19,10 @@ const theme = {
   textAling: {
     center: "center",
   },
+  backgroundColor: {
+    primary: "24292e",
+    secondary: "red",
+  },
 };
 
 export default theme;
