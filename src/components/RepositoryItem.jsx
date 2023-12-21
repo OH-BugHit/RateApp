@@ -1,8 +1,26 @@
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+  logo: {
+    width: 66,
+    height: 58,
+  },
+});
 
 const RepositoryItem = ({ props }) => {
   return (
     <View>
+      <Image
+        style={styles.tinyLogo}
+        source={{ uri: props.ownerAvatarUrl }}
+      ></Image>
       <Text>Full Name: {props.fullName} </Text>
       <Text>Description: {props.description} </Text>
       <Text>Language: {props.language} </Text>
