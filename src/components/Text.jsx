@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.heading,
   },
   fontWeightBold: {
-    fontFamily: theme.fontWeights.bold,
+    fontWeight: theme.fontWeights.bold,
   },
   textAlingCenter: {
     textAlign: theme.textAling.center,

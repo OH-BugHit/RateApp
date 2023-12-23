@@ -17,7 +17,7 @@ const theme = {
   },
   fontWeights: {
     normal: "400",
-    bold: "900",
+    bold: "700",
   },
   textAling: {
     center: "center",

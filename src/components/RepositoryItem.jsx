@@ -69,7 +69,7 @@ const RepositoryItem = ({ props }) => {
         ></Image>
         <View style={styles.flexColumn}>
           <View style={styles.flexItemB}>
-            <Text>{props.fullName} </Text>
+            <Text fontWeight="bold">{props.fullName} </Text>
             <Text>{props.description} </Text>
           </View>
           <View style={styles.flexItemLanguage}>
