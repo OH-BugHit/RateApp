@@ -1,8 +1,10 @@
 const theme = {
   colors: {
-    textPrimary: "#24292e",
+    textPrimary: "#24292E",
     textSecondary: "#586069",
-    primary: "#0366d6",
+    primary: "#0366D6",
+    white: "white",
+    gray: "gray",
   },
   fontSizes: {
     body: 14,
@@ -11,17 +13,19 @@ const theme = {
   },
   fonts: {
     main: "System",
+    bold: "System" + "-bold",
   },
   fontWeights: {
     normal: "400",
-    bold: "700",
+    bold: "900",
   },
   textAling: {
     center: "center",
   },
   backgroundColor: {
-    primary: "24292e",
+    primary: "#F6F6F6",
     secondary: "red",
+    itemBackground: "white",
   },
 };
 

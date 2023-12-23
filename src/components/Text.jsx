@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
   colorPrimary: {
     color: theme.colors.primary,
   },
+  colorWhite: {
+    color: theme.colors.white,
+  },
+  colorGray: {
+    color: theme.colors.gray,
+  },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
   },
@@ -22,22 +28,40 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.heading,
   },
   fontWeightBold: {
-    fontWeight: theme.fontWeights.bold,
+    fontFamily: theme.fontWeights.bold,
   },
   textAlingCenter: {
     textAlign: theme.textAling.center,
   },
+  textBackgroundSecondary: {
+    backgroundColor: theme.backgroundColor.secondary,
+  },
+  textBackgroundPrimary: {
+    backgroundColor: theme.colors.textPrimary,
+  },
 });
 
-const Text = ({ color, fontSize, fontWeight, style, textAlign, ...props }) => {
+const Text = ({
+  color,
+  fontSize,
+  fontWeight,
+  style,
+  textAlign,
+  textBackground,
+  ...props
+}) => {
   const textStyle = [
     styles.text,
     color === "textSecondary" && styles.colorTextSecondary,
     color === "primary" && styles.colorPrimary,
+    color === "white" && styles.colorWhite,
+    color === "gray" && styles.colorGray,
     fontSize === "subheading" && styles.fontSizeSubheading,
     fontSize === "heading" && styles.fontSizeHeading,
     fontWeight === "bold" && styles.fontWeightBold,
     textAlign === "center" && styles.textAlingCenter,
+    textBackground === "secondary" && styles.textBackgroundSecondary,
+    textBackground === "primary" && styles.textBackgroundPrimary,
     style,
   ];
 

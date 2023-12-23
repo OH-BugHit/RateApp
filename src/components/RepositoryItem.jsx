@@ -1,6 +1,9 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
+import Text from "./Text";
+import theme from "../theme";
+import InfoCell from "./InfoCell";
 
-const styles = StyleSheet.create({
+const imageStyle = StyleSheet.create({
   container: {
     paddingTop: 50,
   },
@@ -14,20 +17,74 @@ const styles = StyleSheet.create({
   },
 });
 
+const styles = StyleSheet.create({
+  flexContainer: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: theme.backgroundColor.itemBackground,
+    padding: 4,
+    margin: 4,
+  },
+  flexRow: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexDirection: "row",
+  },
+  flexColumn: {
+    marginLeft: 6,
+    flexGrow: 0,
+    flexShrink: 1,
+    flexDirection: "column",
+    width: "auto",
+  },
+  flexItemB: {
+    padding: 4,
+    flexShrink: 1,
+  },
+  flexItemLanguage: {
+    flex: 0,
+    alignSelf: "flex-start",
+    backgroundColor: theme.colors.primary,
+    borderRadius: 4,
+    padding: 4,
+    width: "auto",
+  },
+  evenlyDistributedRow: {
+    marginTop: 8,
+    marginBottom: 8,
+    flexGrow: 0,
+    flexShrink: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
+
 const RepositoryItem = ({ props }) => {
   return (
-    <View>
-      <Image
-        style={styles.tinyLogo}
-        source={{ uri: props.ownerAvatarUrl }}
-      ></Image>
-      <Text>Full Name: {props.fullName} </Text>
-      <Text>Description: {props.description} </Text>
-      <Text>Language: {props.language} </Text>
-      <Text>Stars: {props.stargazersCount} </Text>
-      <Text>Forks: {props.forksCount} </Text>
-      <Text>Reviews: {props.reviewCount} </Text>
-      <Text>Rating: {props.ratingAverage} </Text>
+    <View style={styles.flexContainer}>
+      <View style={styles.flexRow}>
+        <Image
+          style={imageStyle.tinyLogo}
+          source={{ uri: props.ownerAvatarUrl }}
+        ></Image>
+        <View style={styles.flexColumn}>
+          <View style={styles.flexItemB}>
+            <Text>{props.fullName} </Text>
+            <Text>{props.description} </Text>
+          </View>
+          <View style={styles.flexItemLanguage}>
+            <Text textAlign="center" color="white">
+              {props.language}
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.evenlyDistributedRow}>
+        <InfoCell text="Stars" value={props.stargazersCount}></InfoCell>
+        <InfoCell text="Forks" value={props.forksCount}></InfoCell>
+        <InfoCell text="Reviews" value={props.reviewCount}></InfoCell>
+        <InfoCell text="Rating" value={props.ratingAverage}></InfoCell>
+      </View>
     </View>
   );
 };
