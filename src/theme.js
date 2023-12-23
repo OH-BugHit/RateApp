@@ -3,7 +3,7 @@ const theme = {
     textPrimary: "#24292E",
     textSecondary: "#586069",
     primary: "#0366D6",
-    white: "white",
+    white: "#FFFFFF",
     gray: "gray",
   },
   fontSizes: {
@@ -13,7 +13,6 @@ const theme = {
   },
   fonts: {
     main: "System",
-    bold: "System" + "-bold",
   },
   fontWeights: {
     normal: "400",
