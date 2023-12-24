@@ -16,3 +16,4 @@ web-build/
 node_modules
 .DS_Store
 database.sqlite
+env.js
