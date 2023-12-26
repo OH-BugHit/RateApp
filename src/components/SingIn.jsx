@@ -2,6 +2,7 @@ import SingInForm from "./SingInForm";
 import { View } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import useSingIn from "../hooks/useSingIn";
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -15,8 +16,16 @@ const validationSchema = yup.object().shape({
 });
 
 const SingIn = () => {
-  const onSubmit = (values) => {
-    console.log(`submit ${values}`);
+  const [singIn] = useSingIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+    try {
+      const { data } = await singIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(`Ongelmia sisäänkirjautumisessa: ${e}`); // virheenkäsittely tänne...
+    }
   };
 
   const initialValues = {
