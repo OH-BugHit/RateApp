@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+// tehdään tämmönen luokka, että ei mene globaalit nimet ristiin.
 class AuthStorage {
   constructor(namespace = "auth") {
     this.namespace = namespace;
@@ -17,7 +17,6 @@ class AuthStorage {
       `${this.namespace}:accessToken`,
       JSON.stringify(accessToken)
     );
-    console.log(`New access token added to storage, value: ${accessToken}`);
   }
 
   async removeAccessToken() {
@@ -26,5 +25,3 @@ class AuthStorage {
 }
 
 export default AuthStorage;
-
-//Varmista kun otat käyttöön että tarviiko stringify, kun täs on vaan yksi string joka tulee ja sit palautukseen kans et : "" tms.

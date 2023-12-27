@@ -2,6 +2,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import { SING_IN } from "../graphql/mutations";
 import useAuthStorage from "./useAuthStorage";
 
+// hookki kirjautumiselle
 const useSingIn = () => {
   const [mutate, result] = useMutation(SING_IN);
   const authStorage = useAuthStorage();
