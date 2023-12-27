@@ -17,6 +17,7 @@ class AuthStorage {
       `${this.namespace}:accessToken`,
       JSON.stringify(accessToken)
     );
+    console.log(`New access token added to storage, value: ${accessToken}`);
   }
 
   async removeAccessToken() {

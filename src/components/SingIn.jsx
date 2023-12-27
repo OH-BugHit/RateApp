@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useSingIn from "../hooks/useSingIn";
+import { useNavigate } from "react-router-native";
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -17,14 +18,23 @@ const validationSchema = yup.object().shape({
 
 const SingIn = () => {
   const [singIn] = useSingIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const { data } = await singIn({ username, password });
       console.log(data);
+      navigate("/");
     } catch (e) {
-      console.log(`Ongelmia sisäänkirjautumisessa: ${e}`); // virheenkäsittely tänne...
+      try {
+        // retry, ei ehkä nätti mut tekee sen..
+        const { data } = await singIn({ username, password });
+        console.log(data);
+        navigate("/");
+      } catch (e) {
+        console.log(`Ongelmia sisäänkirjautumisessa: ${e}`); // virheenkäsittely tänne...
+      }
     }
   };
 
