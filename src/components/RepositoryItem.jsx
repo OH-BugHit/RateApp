@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({ props }) => {
   return (
-    <View style={styles.flexContainer}>
+    <View testID="repositoryItem" style={styles.flexContainer}>
       <View style={styles.flexRow}>
         <Image
           style={imageStyle.tinyLogo}
