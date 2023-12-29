@@ -16,6 +16,25 @@ const validationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
+export const SingInContainer = ({ onSubmit }) => {
+  const initialValues = {
+    username: undefined,
+    password: undefined,
+  };
+
+  return (
+    <View>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit }) => <SingInForm onSubmit={handleSubmit} />}
+      </Formik>
+    </View>
+  );
+};
+
 const SingIn = () => {
   const [singIn] = useSingIn();
   const navigate = useNavigate();
@@ -38,22 +57,7 @@ const SingIn = () => {
     }
   };
 
-  const initialValues = {
-    username: undefined,
-    password: undefined,
-  };
-
-  return (
-    <View>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ handleSubmit }) => <SingInForm onSubmit={handleSubmit} />}
-      </Formik>
-    </View>
-  );
+  return <SingInContainer onSubmit={onSubmit} />;
 };
 
 export default SingIn;
