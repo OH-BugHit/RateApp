@@ -16,12 +16,18 @@ const AppBar = () => {
   const { me } = useMe();
 
   // Ehdollinen singin/out näyttäminen sen mukaan, onko 'me' haun tulos null vai ei
-  const displaySingInOut = () => {
+  const loggedDisplay = () => {
     const tulos = me;
     if (tulos === null || tulos.me === null) {
+      // If not logged in
       return <AppBarTab teksti={"Sing in"} route={"/login"} />;
     } else {
-      return <AppBarTab teksti={"Sing out"} route={"/"} />;
+      return (
+        <>
+          <AppBarTab teksti={"Create a review"} route={"/create_review"} />
+          <AppBarTab teksti={"Sing out"} route={"/"} />
+        </>
+      );
     }
   };
 
@@ -29,7 +35,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab teksti={"Repositories"} route={"/"} />
-        {displaySingInOut()}
+        {loggedDisplay()}
       </ScrollView>
     </View>
   );

@@ -46,14 +46,7 @@ const SingIn = () => {
       console.log(data);
       navigate("/");
     } catch (e) {
-      try {
-        // retry, ei ehkä nätti mut tekee sen..
-        const { data } = await singIn({ username, password });
-        console.log(data);
-        navigate("/");
-      } catch (e) {
-        console.log(`Ongelmia sisäänkirjautumisessa: ${e}`); // virheenkäsittely tänne...
-      }
+      console.log(`Ongelmia sisäänkirjautumisessa: ${e}`);
     }
   };
 

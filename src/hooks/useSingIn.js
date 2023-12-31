@@ -10,7 +10,7 @@ const useSingIn = () => {
 
   const singIn = async ({ username, password }) => {
     console.log(`singin in with un: ${username} and pw: ${password}`);
-    await mutate({
+    const result = await mutate({
       variables: { username: username, password: password },
     });
     await authStorage.setAccessToken(result.data.authenticate.accessToken);
