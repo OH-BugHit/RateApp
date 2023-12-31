@@ -8,6 +8,15 @@ export const SING_IN = gql`
   }
 `;
 
+export const SING_UP = gql`
+  mutation singup($username: String!, $password: String!) {
+    createUser(user: { username: $username, password: $password }) {
+      id
+      username
+    }
+  }
+`;
+
 export const CREATE_REVIEW = gql`
   mutation Mutation($review: CreateReviewInput) {
     createReview(review: $review) {

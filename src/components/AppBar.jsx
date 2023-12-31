@@ -20,7 +20,12 @@ const AppBar = () => {
     const tulos = me;
     if (tulos === null || tulos.me === null) {
       // If not logged in
-      return <AppBarTab teksti={"Sing in"} route={"/login"} />;
+      return (
+        <>
+          <AppBarTab teksti={"Sing in"} route={"/login"} />
+          <AppBarTab teksti={"Sing up"} route={"/singup"} />
+        </>
+      );
     } else {
       return (
         <>
