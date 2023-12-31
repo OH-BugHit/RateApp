@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     flexGrow: 1,
+    justifyContent: "center",
     margin: 10,
     backgroundColor: theme.colors.primary,
     borderRadius: 4,

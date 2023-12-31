@@ -1,7 +1,10 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Pressable } from "react-native";
 import Text from "./Text";
 import theme from "../theme";
 import InfoCell from "./InfoCell";
+import { useParams } from "react-router-native";
+import useRepository from "../hooks/useRepository";
+import { Linking } from "react-native";
 
 const imageStyle = StyleSheet.create({
   container: {
@@ -57,9 +60,42 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  openButton: {
+    flexGrow: 1,
+    justifyContent: "center",
+    margin: 10,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 4,
+    padding: 4,
+    minHeight: 42,
+  },
 });
 
 const RepositoryItem = ({ props }) => {
+  const { id } = useParams();
+
+  if (props === undefined) {
+    const { repository } = useRepository(id);
+    props = repository ? repository : {};
+  }
+
+  const onPress = (url) => {
+    Linking.openURL(url);
+  };
+
+  const ifSingle = () => {
+    if (!id) {
+      return null;
+    }
+    return (
+      <Pressable style={styles.openButton} onPress={() => onPress(props.url)}>
+        <Text color="white" fontSize="heading" textAlign="center">
+          Open in GitHub
+        </Text>
+      </Pressable>
+    );
+  };
+
   return (
     <View testID="repositoryItem" style={styles.flexContainer}>
       <View style={styles.flexRow}>
@@ -85,6 +121,7 @@ const RepositoryItem = ({ props }) => {
         <InfoCell text="Reviews" value={props.reviewCount}></InfoCell>
         <InfoCell text="Rating" value={props.ratingAverage}></InfoCell>
       </View>
+      {ifSingle()}
     </View>
   );
 };
