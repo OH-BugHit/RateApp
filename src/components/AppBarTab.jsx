@@ -19,7 +19,7 @@ const AppBarTab = ({ teksti, route }) => {
     navigate(route);
   };
   return (
-    <Pressable style={{ padding: 8 }} onPressIn={() => onPressed(route)}>
+    <Pressable style={{ padding: 8 }} onPress={() => onPressed(route)}>
       <Text color="textSecondary" fontSize="heading">
         {teksti}
       </Text>

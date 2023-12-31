@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
   colorGray: {
     color: theme.colors.gray,
   },
+  colorBlue: {
+    color: theme.colors.blue,
+  },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
   },
@@ -59,6 +62,7 @@ const Text = ({
     color === "primary" && styles.colorPrimary,
     color === "white" && styles.colorWhite,
     color === "gray" && styles.colorGray,
+    color === "blue" && styles.colorBlue,
     fontSize === "subheading" && styles.fontSizeSubheading,
     fontSize === "heading" && styles.fontSizeHeading,
     fontWeight === "bold" && styles.fontWeightBold,
