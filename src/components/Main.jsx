@@ -6,6 +6,7 @@ import SingIn from "./SingIn";
 import SingleRepository from "./SingleRepository";
 import CreateReview from "./CreateReview";
 import SingUp from "./SingUp";
+import MyReviews from "./MyReviews";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path="/repository/:id" element={<SingleRepository />} />
         <Route path="/create_review" element={<CreateReview />} />
         <Route path="/singup" element={<SingUp />} />
+        <Route path="/my_reviews" element={<MyReviews />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

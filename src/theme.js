@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 const theme = {
   colors: {
     textPrimary: "#24292E",
@@ -31,5 +33,32 @@ const theme = {
     itemBackground: "white",
   },
 };
+
+export const themeStyles = StyleSheet.create({
+  separator: {
+    height: 10,
+  },
+  flexContainer: {
+    backgroundColor: theme.backgroundColor.itemBackground,
+    padding: 10,
+  },
+  flexRow: {
+    flexDirection: "row",
+    margin: 2,
+  },
+  flexColumn: {
+    marginLeft: 6,
+    flexGrow: 0,
+    flexShrink: 1,
+    flexDirection: "column",
+  },
+  openButton: {
+    justifyContent: "center",
+    margin: 10,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 4,
+    padding: 4,
+  },
+});
 
 export default theme;

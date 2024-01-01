@@ -1,6 +1,6 @@
-import { FlatList, View, StyleSheet, Pressable, TextInput } from "react-native";
+import { FlatList, View, Pressable, TextInput } from "react-native";
 import RepositoryItem from "./RepositoryItem";
-import theme from "../theme";
+import theme, { themeStyles } from "../theme";
 import useRepositories from "../hooks/useRepositories";
 import { useNavigate } from "react-router-native";
 import { useState } from "react";
@@ -9,13 +9,7 @@ import Text from "./Text";
 import React from "react";
 import { useDebounce } from "use-debounce";
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+const ItemSeparator = () => <View style={themeStyles.separator} />;
 
 export class RepositoryListContainer extends React.Component {
   openRepo = (id) => {
@@ -53,7 +47,6 @@ export class RepositoryListContainer extends React.Component {
           </Pressable>
         </View>
         <Picker
-          style={styles.openButton}
           selectedValue={this.props.listing}
           onValueChange={(itemValue) => this.props.setListing(itemValue)}
         >

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { me } = useMe();
+  const { me } = useMe(false);
 
   // Ehdollinen singin/out näyttäminen sen mukaan, onko 'me' haun tulos null vai ei
   const loggedDisplay = () => {
@@ -30,6 +30,7 @@ const AppBar = () => {
       return (
         <>
           <AppBarTab teksti={"Create a review"} route={"/create_review"} />
+          <AppBarTab teksti={"My reviews"} route={"/my_reviews"} />
           <AppBarTab teksti={"Sing out"} route={"/"} />
         </>
       );

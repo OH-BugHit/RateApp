@@ -1,51 +1,28 @@
-import { FlatList, Linking, Pressable, StyleSheet, View } from "react-native";
+import { FlatList, Linking, Pressable, View } from "react-native";
 import Text from "./Text";
-import theme from "../theme";
+import theme, { themeStyles } from "../theme";
 import { useParams } from "react-router-native";
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
 
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-  flexContainer: {
-    backgroundColor: theme.backgroundColor.itemBackground,
-    padding: 10,
-  },
-  flexRow: {
-    flexDirection: "row",
-    margin: 2,
-  },
-  flexColumn: {
-    marginLeft: 6,
-    flexGrow: 0,
-    flexShrink: 1,
-    flexDirection: "column",
-  },
-  openButton: {
-    justifyContent: "center",
-    margin: 10,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 4,
-    padding: 4,
-  },
-});
-
-const parseDate = (date) => {
+const ParseDate = (date) => {
   if (!date) return null;
   const short = String(date).substring(0, 10).split("-");
   return `${short[2]}.${short[1]}.${short[0]}`;
 };
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review, repoName }) => {
   if (!review) {
     return null;
   }
 
+  const headerName =
+    review.user !== undefined ? review.user.username : repoName;
+
+  console.log(headerName);
   return (
-    <View style={styles.flexContainer}>
-      <View style={styles.flexRow}>
+    <View style={themeStyles.flexContainer}>
+      <View style={themeStyles.flexRow}>
         <View
           style={{
             justifyContent: "center",
@@ -63,17 +40,19 @@ const ReviewItem = ({ review }) => {
           </Text>
         </View>
 
-        <View style={styles.flexColumn}>
-          <Text fontWeight={"bold"}>{review.user.username}</Text>
-          <Text color={"gray"}>{parseDate(review.createdAt)}</Text>
-          <Text>{review.text}</Text>
+        <View style={themeStyles.flexColumn}>
+          <Text fontWeight={"bold"} fontSize={"subheading"}>
+            {headerName}
+          </Text>
+          <Text color={"gray"}>{ParseDate(review.createdAt)}</Text>
+          <Text style={{ marginTop: 8 }}>{review.text}</Text>
         </View>
       </View>
     </View>
   );
 };
 
-const ItemSeparator = () => <View style={styles.separator} />; // keyt oikein, missä lie mättää kun ei scrollaa...
+const ItemSeparator = () => <View style={themeStyles.separator} />;
 
 const RepositoryInfo = ({ props }) => {
   const onPress = (url) => {
@@ -82,7 +61,10 @@ const RepositoryInfo = ({ props }) => {
   return (
     <View>
       <RepositoryItem props={props} />
-      <Pressable style={styles.openButton} onPress={() => onPress(props.url)}>
+      <Pressable
+        style={themeStyles.openButton}
+        onPress={() => onPress(props.url)}
+      >
         <Text color="white" fontSize="heading" textAlign="center">
           Open in GitHub
         </Text>
@@ -105,7 +87,9 @@ const SingleRepository = () => {
     <FlatList
       style={{ backgroundColor: theme.backgroundColor.primary }}
       data={repository.reviews.edges}
-      renderItem={({ item }) => <ReviewItem review={item.node} />}
+      renderItem={({ item }) => (
+        <ReviewItem review={item.node} repoName={null} />
+      )}
       keyExtractor={(item) => item.node.id}
       ItemSeparatorComponent={ItemSeparator}
       ListHeaderComponent={() => <RepositoryInfo props={props} />}
