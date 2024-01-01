@@ -48,7 +48,13 @@ describe("RepositoryList", () => {
       };
 
       // Add your test code here
-      render(<RepositoryListContainer repositories={repositories} />);
+      render(
+        <RepositoryListContainer
+          repositories={repositories}
+          openRepo={() => {}}
+          LinstingHead={() => {}}
+        />
+      );
       // screen.debug(); // Tällä saa näkyviin logiin puuna
       const repositoryItems = screen.getAllByTestId("repositoryItem");
       const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
