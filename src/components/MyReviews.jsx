@@ -1,4 +1,4 @@
-import { Pressable, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import useMe from "../hooks/useMe";
 import { ReviewItem } from "./SingleRepository";
 import { FlatList } from "react-native";
@@ -18,6 +18,28 @@ const MyReviews = () => {
 
   const onPress = (url) => {
     navigate(`/repository/${url}`);
+  };
+
+  const createTwoButtonAlert = (item) => {
+    Alert.alert(
+      "Delete review",
+      "Are you sure you want to delete this review?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {
+            console.log("delete canceled");
+          },
+          style: "cancel",
+        },
+        {
+          text: "DELETE",
+          onPress: () => {
+            onDelete(item);
+          },
+        },
+      ]
+    );
   };
 
   const onDelete = async (item) => {
@@ -60,7 +82,9 @@ const MyReviews = () => {
             </Pressable>
             <Pressable
               style={themeStyles.deleteButton}
-              onPress={() => onDelete(item.node.id)}
+              onPress={() => {
+                createTwoButtonAlert(item.node.id);
+              }}
             >
               <Text color="white" fontSize="heading" textAlign="center">
                 Delete review
