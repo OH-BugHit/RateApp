@@ -8,6 +8,7 @@ const theme = {
     white: "#FFFFFF",
     gray: "gray",
     blue: "blue",
+    black: "black",
     error: "#d73a4a",
   },
   fontSizes: {
@@ -57,7 +58,16 @@ export const themeStyles = StyleSheet.create({
     margin: 10,
     backgroundColor: theme.colors.primary,
     borderRadius: 4,
-    padding: 4,
+    padding: 10,
+    flexGrow: 1,
+  },
+  deleteButton: {
+    justifyContent: "center",
+    margin: 10,
+    backgroundColor: theme.backgroundColor.secondary,
+    borderRadius: 4,
+    padding: 10,
+    flexGrow: 1,
   },
 });
 

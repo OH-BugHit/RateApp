@@ -19,7 +19,6 @@ export const ReviewItem = ({ review, repoName }) => {
   const headerName =
     review.user !== undefined ? review.user.username : repoName;
 
-  console.log(headerName);
   return (
     <View style={themeStyles.flexContainer}>
       <View style={themeStyles.flexRow}>
