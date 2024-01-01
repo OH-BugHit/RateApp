@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-native";
 import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import Text from "./Text";
+import React from "react";
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -15,44 +17,13 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({
-  repositories,
-  openRepo,
-  LinstingHead,
-}) => {
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : [];
-
-  return (
-    <FlatList
-      style={{ backgroundColor: theme.backgroundColor.primary }}
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => (
-        <Pressable onPress={() => openRepo(item.id)}>
-          <RepositoryItem props={item} />
-        </Pressable>
-      )}
-      keyExtractor={(item) => item.id}
-      ListHeaderComponent={() => <LinstingHead />}
-    />
-  );
-};
-
-const RepositoryList = () => {
-  const [listing, setListing] = useState("CREATED_AT");
-  const [search, setSearch] = useState("");
-  const { repositories } = useRepositories(listing);
-  const navigate = useNavigate();
-
-  const openRepo = (id) => {
+export class RepositoryListContainer extends React.Component {
+  openRepo = (id) => {
     console.log(`repository ${id} pressed`);
-    navigate(`/repository/${id}`);
+    this.props.navigate(`/repository/${id}`);
   };
 
-  const LinstingHead = () => {
-    console.log(search);
+  renderHeader = () => {
     return (
       <View style={{ padding: 4 }}>
         <View
@@ -67,21 +38,24 @@ const RepositoryList = () => {
             padding: 10,
           }}
         >
+          <Text fontSize={"heading"} style={{ paddingHorizontal: 10 }}>
+            🔎
+          </Text>
           <TextInput
-            onChangeText={(value) => setSearch(value)}
-            value={search}
+            onChangeText={(value) => this.props.setSearch(value)}
+            value={this.props.search}
             style={{ flexGrow: 1 }}
           ></TextInput>
-          <Pressable onPress={() => setSearch("")}>
+          <Pressable onPress={() => this.props.setSearch("")}>
             <Text fontSize="heading" style={{ paddingHorizontal: 6 }}>
-              X
+              ✖️
             </Text>
           </Pressable>
         </View>
         <Picker
           style={styles.openButton}
-          selectedValue={listing}
-          onValueChange={(itemValue) => setListing(itemValue)}
+          selectedValue={this.props.listing}
+          onValueChange={(itemValue) => this.props.setListing(itemValue)}
         >
           <Picker.Item
             label="Select an item..."
@@ -96,11 +70,44 @@ const RepositoryList = () => {
     );
   };
 
+  render() {
+    const repositoryNodes = this.props.repositories
+      ? this.props.repositories.edges.map((edge) => edge.node)
+      : [];
+
+    return (
+      <FlatList
+        style={{ backgroundColor: theme.backgroundColor.primary }}
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={({ item }) => (
+          <Pressable onPress={() => this.openRepo(item.id)}>
+            <RepositoryItem props={item} />
+          </Pressable>
+        )}
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={this.renderHeader}
+      />
+    );
+  }
+}
+
+const RepositoryList = () => {
+  const [listing, setListing] = useState("CREATED_AT");
+  const [search, setSearch] = useState("");
+  const [bounce] = useDebounce(search, 200);
+  const { repositories } = useRepositories(listing, bounce);
+  const navigate = useNavigate();
+
   return (
     <RepositoryListContainer
       repositories={repositories}
-      openRepo={openRepo}
-      LinstingHead={LinstingHead}
+      navigate={navigate}
+      listing={listing}
+      setListing={setListing}
+      search={search}
+      setSearch={setSearch}
+      bounce={bounce}
     />
   );
 };

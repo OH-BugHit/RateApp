@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORIES } from "../graphql/queries";
 
-const useRepositories = (listing) => {
+const useRepositories = (listing, bounce) => {
   let direction;
   switch (listing) {
     case "CREATED_AT": {
@@ -22,7 +22,11 @@ const useRepositories = (listing) => {
   }
   const { data, error, loading } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: "cache-and-network",
-    variables: { orderBy: listing, orderDirection: direction },
+    variables: {
+      orderBy: listing,
+      orderDirection: direction,
+      searchKeyword: bounce,
+    },
   });
   return {
     repositories: data ? data.repositories : null,
