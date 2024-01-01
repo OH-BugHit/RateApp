@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.backgroundColor.itemBackground,
     padding: 4,
     margin: 4,
+    paddingTop: 10,
   },
   flexRow: {
     flexShrink: 1,
