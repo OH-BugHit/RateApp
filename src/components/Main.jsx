@@ -1,12 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import { Route, Routes, Navigate } from "react-router-native";
-import RepositoryList from "./RepositoryList";
-import AppBar from "./AppBar";
-import SingIn from "./SingIn";
-import SingleRepository from "./SingleRepository";
-import CreateReview from "./CreateReview";
-import SingUp from "./SingUp";
-import MyReviews from "./MyReviews";
+import RepositoryList from "./RepositoriesAndReviews/RepositoryList";
+import AppBar from "./AppBar/AppBar";
+import SingIn from "./SingIn/SingIn";
+import SingleRepository from "./RepositoriesAndReviews/SingleRepository";
+import CreateReview from "./CreateReview/CreateReview";
+import SingUp from "./SingUp/SingUp";
+import MyReviews from "./RepositoriesAndReviews/MyReviews";
 
 const styles = StyleSheet.create({
   container: {

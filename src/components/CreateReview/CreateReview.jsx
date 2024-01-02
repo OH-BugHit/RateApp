@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-native";
 import CreateReviewForm from "./CreateReviewForm";
-import useCreateReview from "../hooks/useCreateReview";
+import useCreateReview from "../../hooks/useCreateReview";
 
 const validationSchema = yup.object().shape({
   ownerName: yup

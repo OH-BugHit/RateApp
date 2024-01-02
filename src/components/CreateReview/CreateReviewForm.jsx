@@ -1,6 +1,6 @@
-import theme from "../theme";
-import FormikTextInput from "./FormikTextInput";
-import Text from "./Text";
+import theme from "../../theme";
+import FormikTextInput from "../Utils/FormikTextInput";
+import Text from "../Utils/Text";
 import { Pressable, View, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -19,23 +19,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const SingUpForm = ({ onSubmit }) => {
+const CreateReviewForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput name="username" placeholder="Username" />
-      <FormikTextInput name="password" placeholder="Password" secureTextEntry />
-      <FormikTextInput
-        name="passwordConfirmation"
-        placeholder="Password confirmation"
-        secureTextEntry
-      />
+      <FormikTextInput name="ownerName" placeholder="Repository owner name" />
+      <FormikTextInput name="repositoryName" placeholder="Repository name" />
+      <FormikTextInput name="rating" placeholder="Rating between 0 and 100" />
+      <FormikTextInput name="text" placeholder="Review" multiline={true} />
       <Pressable style={styles.loginButton} onPress={onSubmit}>
         <Text color="white" fontSize="heading" textAlign="center">
-          Log in
+          Create a review
         </Text>
       </Pressable>
     </View>
   );
 };
 
-export default SingUpForm;
+export default CreateReviewForm;

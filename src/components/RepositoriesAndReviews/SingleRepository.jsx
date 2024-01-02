@@ -1,8 +1,8 @@
 import { FlatList, Linking, Pressable, View } from "react-native";
-import Text from "./Text";
-import theme, { themeStyles } from "../theme";
+import Text from "../Utils/Text";
+import theme, { themeStyles } from "../../theme";
 import { useParams } from "react-router-native";
-import useRepository from "../hooks/useRepository";
+import useRepository from "../../hooks/useRepository";
 import RepositoryItem from "./RepositoryItem";
 
 const ParseDate = (date) => {

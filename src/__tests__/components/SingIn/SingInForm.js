@@ -4,7 +4,7 @@ import {
   fireEvent,
   waitFor,
 } from "@testing-library/react-native";
-import { SingInContainer } from "../../components/SingIn";
+import { SingInContainer } from "../../../components/SingIn/SingIn";
 const onSubmit = jest.fn();
 
 describe("SignIn", () => {

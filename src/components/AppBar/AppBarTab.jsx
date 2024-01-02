@@ -1,7 +1,7 @@
 import { Pressable } from "react-native";
-import Text from "./Text";
+import Text from "../Utils/Text";
 import { useNavigate } from "react-router-native";
-import useAuthStorage from "../hooks/useAuthStorage";
+import useAuthStorage from "../../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
 
 const AppBarTab = ({ teksti, route }) => {

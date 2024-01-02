@@ -1,11 +1,11 @@
 import { Alert, Pressable, View } from "react-native";
-import useMe from "../hooks/useMe";
+import useMe from "../../hooks/useMe";
 import { ReviewItem } from "./SingleRepository";
 import { FlatList } from "react-native";
-import theme, { themeStyles } from "../theme";
-import Text from "./Text";
+import theme, { themeStyles } from "../../theme";
+import Text from "../Utils/Text";
 import { useNavigate } from "react-router-native";
-import useDeleteReview from "../hooks/useDeleteReview";
+import useDeleteReview from "../../hooks/useDeleteReview";
 
 const ItemSeparator = () => <View style={themeStyles.separator} />;
 
