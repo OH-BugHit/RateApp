@@ -75,8 +75,16 @@ const RepositoryInfo = ({ props }) => {
 const SingleRepository = () => {
   const { id } = useParams();
 
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository({
+    id,
+    first: 3,
+  });
   const props = repository ? repository : {};
+
+  const onEndReach = () => {
+    console.log("end reached");
+    fetchMore();
+  };
 
   if (props.id === undefined) {
     return null;
@@ -91,6 +99,8 @@ const SingleRepository = () => {
       )}
       keyExtractor={(item) => item.node.id}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.1}
       ListHeaderComponent={() => <RepositoryInfo props={props} />}
     />
   );

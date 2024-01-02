@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { REPOSITORY_FRAGMENT } from "./fragment";
+import { REPOSITORY_FRAGMENT, REVIEW_BASIC_FRAGMENT } from "./fragment";
 
 export const GET_REPOSITORIES = gql`
   query repositories(
@@ -23,26 +23,30 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_SINGLE_REPOSITORY = gql`
-  query repository($id: ID!) {
+  query repository($id: ID!, $first: Int!, $after: String) {
     repository(id: $id) {
       url
       ...RepositoryDetails
-      reviews {
+      reviews(first: $first, after: $after) {
         edges {
           node {
-            id
-            text
-            rating
-            createdAt
+            ...ReviewDetails
             user {
               id
               username
             }
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }
   }
+  ${REVIEW_BASIC_FRAGMENT}
   ${REPOSITORY_FRAGMENT}
 `;
 
@@ -54,10 +58,7 @@ export const ME = gql`
       reviews @include(if: $includeReviews) {
         edges {
           node {
-            createdAt
-            id
-            text
-            rating
+            ...ReviewDetails
             repository {
               fullName
             }
@@ -67,4 +68,5 @@ export const ME = gql`
       }
     }
   }
+  ${REVIEW_BASIC_FRAGMENT}
 `;
